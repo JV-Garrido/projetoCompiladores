@@ -1,0 +1,12 @@
+programa
+	numero a, b;
+	numero c;
+	
+	a = 3.5;
+	b = 4.2;
+	
+	c = a/b;
+	
+	escreva(c);
+	
+fimprog;
