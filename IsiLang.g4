@@ -42,13 +42,6 @@ grammar IsiLang;
 		}
 	}
 	
-	public void verificaInit(String id){
-		IsiVariable var = (IsiVariable)symbolTable.get(id);
-		if (var.getValue() == null){
-			throw new IsiSemanticException("Symbol "+id+" used with no initial value");
-		}
-	}
-	
 	public void verificaUso(){
 		ArrayList<String> goTime = symbolTable.getAllKeys();
 		for (String i : goTime){
@@ -147,7 +140,6 @@ cmdleitura	:	'leia'
 				{
 					IsiVariable var = (IsiVariable)symbolTable.get(_readID);
 					CommandLeitura cmd = new CommandLeitura(_readID, var);
-					if (var.getValue() == null) var.setValue("READY");
 					stack.peek().add(cmd);
 				}
 			;
@@ -162,9 +154,8 @@ cmdescrita	:	'escreva'
 				FP
 				SC
 				{
-					verificaInit(_writeID);
 					IsiVariable var = (IsiVariable)symbolTable.get(_writeID);
-					if (var.getValue() == "READY") var.setValue("SET");
+					if (var.getValue() == null) var.setValue("SET");
 					CommandEscrita cmd = new CommandEscrita(_writeID);
 					stack.peek().add(cmd);
 				}
@@ -181,7 +172,6 @@ cmdattr		: 	ID
 				{
 					IsiVariable var = (IsiVariable)symbolTable.get(_exprID);
 					CommandAttr cmd = new CommandAttr(_exprID, _exprContent);
-					if (var.getValue() == null) var.setValue("READY");
 					stack.peek().add(cmd);
 				}
 				;
@@ -192,9 +182,8 @@ cmdselecao	:	'se'
 				{
 					verificaID(_input.LT(-1).getText()); 
 					_exprDecision = _input.LT(-1).getText();
-					verificaInit(_exprDecision);
 					IsiVariable var = (IsiVariable)symbolTable.get(_exprDecision);
-					if (var.getValue() == "READY") var.setValue("SET");
+					if (var.getValue() == null) var.setValue("SET");
 				} 
 				OPREL { _exprDecision += _input.LT(-1).getText(); }
 				(ID | NUMBER) { _exprDecision += _input.LT(-1).getText(); }
@@ -236,9 +225,8 @@ cmdloop		:	(
 					{
 						verificaID(_input.LT(-1).getText()); 
 						_exprDecision = _input.LT(-1).getText();
-						verificaInit(_exprDecision);
 						IsiVariable var = (IsiVariable)symbolTable.get(_exprDecision);
-						if (var.getValue() == "READY") var.setValue("SET");
+						if (var.getValue() == null) var.setValue("SET");
 					}
 					OPREL { _exprDecision += _input.LT(-1).getText(); }
 					(ID | NUMBER) { _exprDecision += _input.LT(-1).getText(); }
@@ -265,9 +253,8 @@ cmdloop		:	(
 					{
 						verificaID(_input.LT(-1).getText()); 
 						_exprDecision = _input.LT(-1).getText();
-						verificaInit(_exprDecision);
 						IsiVariable var = (IsiVariable)symbolTable.get(_exprDecision);
-						if (var.getValue() == "READY") var.setValue("SET");
+						if (var.getValue() == null) var.setValue("SET");
 					}
 					OPREL { _exprDecision += _input.LT(-1).getText(); }
 					(ID | NUMBER) { _exprDecision += _input.LT(-1).getText(); }
@@ -301,11 +288,13 @@ termo		:	ID
 				{
 					verificaID(_input.LT(-1).getText());
 					_exprContent += _input.LT(-1).getText();
-					verificaInit(_input.LT(-1).getText());
 					IsiVariable var = (IsiVariable)symbolTable.get(_input.LT(-1).getText());
-					if (var.getValue() == "READY") var.setValue("SET");
+					if (var.getValue() == null) var.setValue("SET");
 				}
 			|	NUMBER { _exprContent += _input.LT(-1).getText(); }
+			|	QTE { _exprContent += "\""; } 
+				ID  { _exprContent += _input.LT(-1).getText(); } 
+				QTE { _exprContent += "\""; } 
 			;
 
 AP			:	'(' ;
@@ -329,5 +318,7 @@ OPREL		: 	'>' | '<' | '>=' | '<=' | '==' | '!=' ;
 ID			: 	[a-z] ([a-z] | [A-Z] | [0-9])* ;
 
 NUMBER		: 	[0-9]+ ('.' [0-9]+)? ;
+
+QTE			:	'"';
 
 WS			: 	(' ' | '\t' | '\n' | '\r') -> skip ;

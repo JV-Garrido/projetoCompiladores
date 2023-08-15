@@ -40,17 +40,21 @@ public class IsiVariable extends IsiSymbol{
 	}
 	
 	public String generateJavaCode() {
-		String str; 
+		String str;
+		String init;
 		if (type == NUMBER) {
 			str = "double";
+			init = " = 0";
 		}
 		else
 		if (type == TEXT){
 			str = "String";
+			init = " = \"\"";
 		}else {
 			str = "int";
+			init = " = 0";
 		}
-		return str + " "+super.name+";";
+		return str + " "+super.name+""+init+";";
 	}
 	
 }
