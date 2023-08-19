@@ -38,3 +38,10 @@ usamos o aplicativo org.antlr.v4.Tool
 -package indica que cada classe gerada terá o cabeçalho do package definido
 
 
+Nome dos integrantes do grupo:
+
+João Victor Santos Garrido 11201720800
+João Victor Martins Reis  RA:11201810522
+João Pedro Sousa Bianchim 11201920729
+Thiago Vinícius Pereira Graciano de Souza   RA:11201722589
+

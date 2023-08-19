@@ -4,7 +4,7 @@ programa
     escreva("Programa_Teste");
     escreva ("Digite_A");
     leia (a);
-    escreva ("Digite_B_ou_4");
+    escreva ("Digite_B");
     leia (b);
 
     d = 3;
