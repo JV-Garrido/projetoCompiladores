@@ -12,6 +12,7 @@ package parser;
 	import ast.CommandAttr;
 	import ast.CommandDecisao;
 	import ast.CommandLoop;
+	import ast.CommandPrint;
 	import java.util.ArrayList;
 	import java.util.Stack;
 

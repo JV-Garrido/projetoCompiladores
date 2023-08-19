@@ -12,6 +12,7 @@ grammar IsiLang;
 	import ast.CommandAttr;
 	import ast.CommandDecisao;
 	import ast.CommandLoop;
+	import ast.CommandPrint;
 	import java.util.ArrayList;
 	import java.util.Stack;
 }
@@ -159,6 +160,20 @@ cmdescrita	:	'escreva'
 					CommandEscrita cmd = new CommandEscrita(_writeID);
 					stack.peek().add(cmd);
 				}
+			|	'escreva'
+				AP
+				QTE
+				TXT
+				{
+					_writeID = _input.LT(-1).getText();
+				}
+				QTE
+				FP
+				SC
+				{
+					CommandPrint cmd = new CommandPrint(_writeID);
+					stack.peek().add(cmd);
+				}
 			;
 
 cmdattr		: 	ID
@@ -273,7 +288,7 @@ cmdloop		:	(
 expr		:	termo
 				(
 					OP { _exprContent += _input.LT(-1).getText(); }
-					termo
+					expr
 				)*
 			|	AP { _exprContent += "("; }
 				expr
@@ -316,6 +331,8 @@ FCH			: 	'}' ;
 OPREL		: 	'>' | '<' | '>=' | '<=' | '==' | '!=' ;
 
 ID			: 	[a-z] ([a-z] | [A-Z] | [0-9])* ;
+
+TXT			:	([a-z] | [A-Z]) ([a-z] | [A-Z] | '_' | [0-9])* ;
 
 NUMBER		: 	[0-9]+ ('.' [0-9]+)? ;
 

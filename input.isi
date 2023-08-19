@@ -1,16 +1,33 @@
 programa
-	numero a, b;
-	numero c;
-	texto atumalaka;
-	
-	atumalaka = "kkkkkk";
-	atumalaka = "ops";
-	
-	a = 3.5;
-	b = 4.2;
-	
-	c = a/b;
-	
-	escreva(atumalaka);
-	
+    numero a,b,c,d;
+
+    escreva("Programa_Teste");
+    escreva ("Digite_A");
+    leia (a);
+    escreva ("Digite_B_ou_4");
+    leia (b);
+
+    d = 3;
+
+    enquanto (a < b)
+    {
+        escreva (a);
+        a = a*(5+2);
+        d = d+1;
+    } 
+
+    c = a + b;
+
+    faca
+    {
+        b = b + 1;
+        d = d + 1;
+        escreva(b);
+    } enquanto (b < c);
+
+    escreva ("C_e_igual_a_");
+    escreva (c);
+
+    escreva ("Total_de_Iteracoes");
+    escreva (d);
 fimprog;
