@@ -18,6 +18,7 @@ public class IsiProgram {
 		str.append("public class MainClass{ \n");
 		str.append("	public static void main(String[] args){ \n");
 		str.append("		Scanner _key = new Scanner(System.in);\n");
+		str.append("		String _helpReservadaNaoUsar;\n");
 		for(IsiSymbol symbol: varTable.getAll()) {
 			str.append(symbol.generateJavaCode()+"\n");
 		}
