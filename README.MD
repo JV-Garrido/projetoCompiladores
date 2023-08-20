@@ -29,7 +29,7 @@ Para gerar o Lexer e o Parser a partir da gramática (arquivo com extensão .g4)
 
 `java -cp antlr-4.7.1-complete.jar org.antlr.v4.Tool IsiLang.g4 -package parser -o ./src/parser/`
 
-usamos o aplicativo org.antlr.v4.Tool
+-Descrição dos comandos  usando o aplicativo org.antlr.v4.Tool
 
 -cp para apontar no CLASSPATH a bibliioteca
 
@@ -38,10 +38,16 @@ usamos o aplicativo org.antlr.v4.Tool
 -package indica que cada classe gerada terá o cabeçalho do package definido
 
 
-Nome dos integrantes do grupo:
+- **-Nome dos integrantes do grupo:**
 
--João Victor Santos Garrido 11201720800
--João Victor Martins Reis  RA:11201810522
--João Pedro Sousa Bianchim 11201920729
--Thiago Vinícius Pereira Graciano de Souza RA:11201722589
+- **-João Victor Santos Garrido 11201720800**
+- **-João Victor Martins Reis  RA:11201810522**
+- **-João Pedro Sousa Bianchim 11201920729**
+- **-Thiago Vinícius Pereira Graciano de Souza RA:11201722589**
+
+
+- **[Youtube](https://www.youtube.com/watch?v=OetiuDd8Lac&t=1s&ab_channel=ThiagoVin%C3%ADciusPereiraGracianodeSouza)** - Link do youtube explicando a implementação  do Projeto
+
+
+
 
